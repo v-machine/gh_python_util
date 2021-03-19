@@ -78,17 +78,16 @@ class TreeHandler:
     def __parseDefaultArgs(self):
         """Returns a list of default access from self.func's default argument.
         Raises exception if keyword doesn't match _DEFAULT_ARG"""
-        if self.func.__defaults__ is None:
-            msg = ("'access' default argument not found. It " +
-                   "must be specified in function definition: \n>>> " +
-                   "def func(arg1, arg2, access=['item', 'item']): pass")
-            raise Exception(msg)
-        kwargKey = inspect.getargspec(self.func).args[-1]
-        if kwargKey != TreeHandler._DEFAULT_ARG:
-            msg = ("Invalid keyword argument: %s. Keyword must be %s."
-                   % (kwargKey, TreeHandler._DEFAULT_ARG))
-            raise Exception(msg)
-        return list(self.func.__defaults__)[0]
+        args = inspect.getargspec(self.func).args
+        numPosArgs = len(args) - len(self.func.__defaults__)
+        try:
+            idx = args.index(TreeHandler._DEFAULT_ARG)
+        except ValueError:
+            msg0 = ("'%s' default argument not found." % TreeHandler._DEFAULT_ARG)
+            msg1 = (" It must be specified in function's definition: \n" +
+                    ">>> def func(arg1, arg2, access=['item', 'item']): pass")
+            raise Exception(msg0+msg1)
+        return list(self.func.__defaults__)[idx - numPosArgs]
 
     def __parseAccess(self, key):
         """Returns the parameter access type in _ACCESS_DICT given input key.
