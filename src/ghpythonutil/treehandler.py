@@ -57,6 +57,7 @@ class TreeHandler:
         
     def __call__(self, *args, **kwargs):
         """Returns the result of decorated function"""
+        args = map(self.__toTree, args)
         if kwargs:
             access = [self.__parseAccess(key) for key in 
                       kwargs.get(TreeHandler._DEFAULT_ARG)]
@@ -137,3 +138,12 @@ class TreeHandler:
             for idx in range(len(lst)):
                 result.append(self.__appendDepth(lst[idx], depth-1))
         return result
+
+    def __toTree(self, arg):
+        """Converts arg to Grasshopper.DataTree"""
+        if isinstance(arg, DataTree[object]):
+            return arg
+        elif isinstance(arg, list):
+            return th.list_to_tree(arg)
+        else:
+            return th.list_to_tree([arg])
