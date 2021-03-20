@@ -14,24 +14,17 @@ class TreeHandler:
     behavior triggered by component parameters with "item" or "list" access. 
     The decorator will handle DataTree input in the identical fashion of any 
     default grasshopper components.
-    
-    Attributes:
-        hostComponent : GhPython.Component.ZuiPythonComponent
-        the GHPython component in which TreeHandler is called.
 
     Params:
         func : Callable.
         The function to be decorated by TreeHandler.
 
     Note:
-        1. Set TreeHandler.hostComponent as ghenv.Component before usage.
-
-        2. Argument access must be specified as a list of keywords in a default
+        Argument access must be specified as a list of keywords in a default
         argument in the function definition, i.e., `access=["list", "item"]`.
 
     Example:
         ```
-        >>> TreeHandler.hostComponent = ghenv.Component
         >>> @TreeHandler
             def circle(p, r, access=["item", "item"]):
                 return rs.AddCircle(p, r)
@@ -41,7 +34,6 @@ class TreeHandler:
         >>> output_a = circle(p, r)
         >>> output_b = polyline(v)
     """
-    hostComponent = None
     _DEFAULT_ARG = "access"
     _AccessTypes = namedtuple("_AccessTypes", ["item", "tree", "list"])
     _ACCESS = _AccessTypes(0, 0, 1)
@@ -51,7 +43,6 @@ class TreeHandler:
 
     def __init__(self, func):
         self.func = func
-        self.__inspectHostComponent()
         paramsAccess = self.__parseDefaultArgs()
         self.access = map(self.__parseAccess, paramsAccess)
         
@@ -67,13 +58,6 @@ class TreeHandler:
         lsts = [th.tree_to_list(arg) for arg in args]
         return th.list_to_tree(
             self.__interlaceDepth(lsts, access, depths))
-
-    def __inspectHostComponent(self):
-        """Asserts that the host component set to ghenv.Component"""
-        if not TreeHandler.hostComponent:
-            raise Exception("TreeHandler.hostComponent is None. It " +
-                            "should be 'ghenv.Component'. Set to 'self' " +
-                            "instead after compiling GhPython module")
 
     def __parseDefaultArgs(self):
         """Returns a list of default access from self.func's default argument.
