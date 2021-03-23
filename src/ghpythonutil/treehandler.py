@@ -3,6 +3,7 @@ __version__ = "2021.03.15"
 
 from Grasshopper import DataTree
 from Grasshopper.Kernel.Data import GH_Path
+import ghpythonlib.treehelpers as th
 from collections import namedtuple
 import inspect
 
