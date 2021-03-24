@@ -27,8 +27,8 @@ from ghpythonutil.treehandler import TreeHandler
 
 @TreeHandler
 def func(arg1, arg2, access=["<ACCESS_TYPE>", "<ACCESS_TYPE>"]):
-	# peform tasks
-	return result
+    # peform tasks
+    return result
 
 output = func(arg1, arg2)
 ```
