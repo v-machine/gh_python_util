@@ -128,7 +128,7 @@ class TreeHandler:
 
     def __dataWrapper(self, branches):
         """Returns a list of zipped data item from a list of branches.
-        Repeat the last item if a branch is shorter than the lgerongest."""
+        Repeat the last item if a branch is shorter than the longest."""
         # TODO: handles exceptions if branch content is None
         l = max([len(b) for b in branches])
         return [[b[min(len(b)-1, i)] for b in branches] for i in range(l)]
