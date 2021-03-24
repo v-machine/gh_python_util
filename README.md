@@ -61,7 +61,7 @@ outputC = divideCurve(c, n)
 ### Notes:
 1. Functions decorated with `TreeHandler` will process Data Trees exactly like native Grasshopper components, Regardless of whether the Data Tree had been grafted, flattened, or simplified, and irrespective of whether the input Data Trees have mismatched shapes (topologies).
 
-2. TreeHandler works on composite functions, so there is no need to decorate every function that requires Data Tree Handling, as long as it is called from within the aggregated function. However, access types for all input must be passed into the composite function as a default argument. 
+2. TreeHandler works on composite functions, so there is no need to decorate every function that requires Data Tree handling, as long as it is called from within the aggregated function. However, access types for all input must be passed into the composite function as a default argument. 
 
 3. If an input has `item access` or `list access` set on the GhPython Component, `TreeHandler` will implicitly cast it into a Data Tree. However, function calls will still trigger implicit looping and loose the speed-up benefits.
 
