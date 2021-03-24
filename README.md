@@ -18,7 +18,7 @@ $ rm gh_python_util
 ```
 
 ## TreeHandler
-`treehandler.TreeHandler` is a function decorator for handling Data Trees as inputs in user-defined functions. Calls to decorated functions will avoid implicit looping behavior triggered by component inputs with item access or list access. The decorator will handle DataTree input in a fashion identical to any other default grasshopper component.
+`treehandler.TreeHandler` is a function decorator for handling Data Trees as inputs in user-defined functions. Calls to decorated functions will avoid implicit looping behavior triggered by component inputs with `item access` or `list access`. The decorator will handle DataTree input in a fashion identical to any other default grasshopper component.
 
 ### Usage
 On a GhPython component, right-click on all inputs used by the decoratto set `tree access`. Decorate  functions that require delegated Data Tree handling as following:
@@ -32,7 +32,8 @@ def func(arg1, arg2, access=["<ACCESS_TYPE>", "<ACCESS_TYPE>"]):
 
 output = func(arg1, arg2)
 ```
-Arguments in the decorated function definition must include the `acces` default argument. This is because GhPython component will now parse all input as Data Trees. Thus, we must manually pass the actual access types to `TreeHandler` so that they are parsed correctly when the decorated function is called. `access` can be dynamically overwritten during function calls. a
+
+Arguments in the decorated function definition must include the `acces` default argument. This is because GhPython component will now parse all input as Data Trees. Thus, we must manually pass the actual access types to `TreeHandler` so that they are parsed correctly when the decorated function is called. `access` can be dynamically overwritten during function calls. 
 
 ### Example
 ```
