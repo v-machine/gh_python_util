@@ -16,6 +16,7 @@ $ git clone https://github.com/v-machine/gh_python_util
 $ mv -nv gh_python_util/src/ghpythonutil <PATH>/ghpythonutil
 $ rm gh_python_util
 ```
+You can also manually place the folder <ghpythonutil> into one of path from sys.path.
 
 ## TreeHandler
 `treehandler.TreeHandler` is a function decorator for handling Data Trees as inputs in user-defined functions. Calls to decorated functions will avoid implicit looping behavior triggered by component inputs with `item access` or `list access`. The decorator will handle DataTree input in a fashion identical to any other default grasshopper component.
